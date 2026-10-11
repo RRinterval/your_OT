@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f1e9;
+  --foreground: #2f2a25;
+  --paper: #fffdf8;
+  --card: #ffffff;
+  --line: #e6dccd;
+  --muted: #8a7f72;
+  --accent: #5f8f7b;
+  --accent-soft: #e5efe9;
+  --seal: #b5543c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1b1916;
+    --foreground: #ece6dc;
+    --paper: #24211d;
+    --card: #2c2924;
+    --line: #3d3832;
+    --muted: #a0968a;
+    --accent: #7fb39c;
+    --accent-soft: #2f3d36;
+    --seal: #d0745c;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-seal: var(--seal);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-noto-serif-tc), "Songti TC", "PMingLiU", serif;
+
+  --animate-flip-next: flip-next 0.55s ease-out both;
+  --animate-flip-prev: flip-prev 0.55s ease-out both;
+
+  @keyframes flip-next {
+    from {
+      transform: rotateY(-75deg);
+      opacity: 0;
+    }
+    to {
+      transform: rotateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes flip-prev {
+    from {
+      transform: rotateY(75deg);
+      opacity: 0;
+    }
+    to {
+      transform: rotateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Faint ruled lines, like a notebook page. */
+.paper-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    color-mix(in srgb, var(--line) 55%, transparent) 31px,
+    color-mix(in srgb, var(--line) 55%, transparent) 32px
+  );
+}
+
+/* Diary page binds on the left edge, so it flips like a book page. */
+.diary-paper {
+  transform-origin: left center;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .diary-paper {
+    animation: none;
+  }
+}
